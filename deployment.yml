@@ -1,0 +1,25 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bank-app
+  labels:
+    app: nginx
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: mysqldb
+        image: gayathrimulampaka/project:app
+        ports:
+        - containerPort: 8080
+        env:
+            - name: DB_HOST
+              value: devopsdb
